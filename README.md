@@ -1,3 +1,5 @@
+Local policy firewall for coding agents. Client component of [Tempus Guard for GitHub](https://github.com/Julio-Patron/tempus-ddb).
+
 # Ciel Gate
 
 **Categoría:** Agent Change Control / Policy Firewall for Coding Agents.
