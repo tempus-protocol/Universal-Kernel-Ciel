@@ -57,13 +57,13 @@ env.bak/
 venv.bak/
 .venv/
 
-# Ciel Kernel specific
-.ciel/
+# Tempus Guard CLI Kernel specific
+.tempus/
 *.log
 memory/decisions.log
 memory/project_profiles/*.json
 !memory/project_profiles/.gitkeep
-ciel_analysis_*.md
+tempus-guard_analysis_*.md
 self_analysis.md
 .agents/
 ORIGINAL_REQUEST.md
