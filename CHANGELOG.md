@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented here.
 
+## [Unreleased] — 2.0.0 "Guard client"
+
+The Tempus Guard CLI (formerly Ciel) becomes the local client of Tempus Guard for GitHub. One protocol (the
+`tempus.action-intent.v1` contract of tempus-ddb), one policy evaluator (the gate's), one
+ledger (the gate's), one brand.
+
+### Added
+
+- `tempus guard intent`: builds the `github.push_branch` intent for a branch (`branch`, `base_sha`,
+  `tip_sha`, `new_branch`, `bundle_sha256`, sorted unique `paths` with the executor's
+  semantics, `diff_sha256` over the raw `git diff-tree` listing), writes the git bundle,
+  signs the intent with the agent's Ed25519 key over Tempus canonical JSON and prints
+  `intent`, `agent_id`, `agent_signature`, the derived `action_id` and the bundle digest.
+- `tempus guard request`: hands a signed intent to a local gate (`request_action_signed`) and prints
+  the permit. Needs the optional `gate` extra (`tempus-ddb>=0.6`).
+- `tempus guard hook install | uninstall | status`: a `pre-push` hook that refuses direct pushes
+  unless `TEMPUS_GUARD_ALLOW_DIRECT_PUSH=1`, and never touches a hook it did not write.
+- Configuration from the environment: `TEMPUS_TENANT_ID`, `TEMPUS_AGENT_KEYFILE`,
+  `TEMPUS_RESOURCE`, `TEMPUS_BASE`, `TEMPUS_REMOTE`.
+- Tests against a throwaway bare remote, and a gate conformance test (skipped when
+  `tempus-ddb` is not installed) proving the gate accepts what the CLI signs.
+
+### Changed
+
+- Package rebuilt on the standard library plus `cryptography`; `typer`, `pydantic`,
+  `pyyaml` and `rich` are gone. Build backend is hatchling. Console scripts: `tempus-guard`
+  (and `tempus-guard-cli`, kept as an alias).
+- README, CONTRIBUTING and SECURITY rewritten in English for the product surface.
+
+### Removed
+
+- The local decision ledger (`.ciel/decisions.log`), its hash chain and `ledger verify`.
+- The YAML policy language (`policies/default.yaml`), `policy validate`, the evaluator and
+  the `allow / deny / require_approval` verdicts: policy now lives in the gate.
+- Interactive approval, the allowlisted command runner and the `CIEL_GATE_*` variables.
+- `ciel-gate init` and `ciel-gate check`.
+
+## 1.0.0 - 2026-10-26
+
+Local policy firewall: diff parsing, YAML policies, approval, allowlisted checks and a
+hash-chained ledger (superseded by 2.0.0).
+
 ## 0.9.0 - 2026-07-05
 
 ### Added
@@ -25,24 +67,3 @@ All notable changes to this project will be documented here.
 ### Removed
 
 - Tracked local runtime decision ledger at `.ciel/decisions.log`.
-
-## 0.3.0 - 2026-07-04
-
-### Added
-
-- Central runtime configuration through `ciel.config.CielSettings`.
-- Offline CI mode with `CIEL_DISABLE_LLM=1`.
-- Distribution build validation using `python -m build` and `twine check`.
-- Focused hardening tests for static evidence extraction, gap matching, maturity scoring, and shell safety.
-- License declaration and release support documents.
-
-### Changed
-
-- Local Ollama calls now use environment-configured URL, model, and timeout.
-- Gap fallback now matches claims to specific fact IDs instead of attaching every fact to every claim.
-- Maturity fallback now derives scores from evidence counts, tests, and operational manifests.
-- Shell executor is opt-in, allowlisted, timeout-bound, and does not invoke a system shell.
-
-### Removed
-
-- Stale intelligence test expectations that assumed the old optimistic fallback behavior.

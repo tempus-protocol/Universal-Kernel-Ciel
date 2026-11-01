@@ -29,7 +29,7 @@ Specialized skills live in the `skills/` directory. Each skill is an SOP.
 
 ## 5. Traceability
 
-Record significant architectural, planning, or code-level decisions in the available project ledger. If Tempus DDB is installed, use it. Otherwise, use the local Ciel decision log or a clear changelog entry.
+Record significant architectural, planning, or code-level decisions where they can be verified. Changes that reach GitHub go through Tempus Guard: `tempus guard intent` signs the push intent, the gate issues the permit, and the evidence bundle linked from the "Verified by Tempus" check is the record. The CLI keeps no local ledger; for everything else, write a clear changelog entry.
 
 ## 6. Execution cycle
 

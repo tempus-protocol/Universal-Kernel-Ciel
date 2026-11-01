@@ -1,35 +1,67 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling>=1.25,<2"]
+build-backend = "hatchling.build"
 
 [project]
-name = "ciel-gate"
-version = "1.0.0"
-description = "Agent Change Control / Policy Firewall for Coding Agents"
-authors = [{ name = "JPatronC92" }]
+name = "tempus-guard-cli"
+version = "2.0.0"
+description = "Tempus Guard CLI: the local client of Tempus Guard for GitHub. Turns an agent's branch into a signed Tempus intent and keeps direct pushes out."
 readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.10"
+authors = [
+    {name = "Tempus DDB Contributors"}
+]
+keywords = ["ai", "agents", "authorization", "git", "github", "tempus-ddb", "zero-trust"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Version Control :: Git",
+]
 dependencies = [
-    "typer>=0.9.0",
-    "pydantic>=2.4.0",
-    "pyyaml>=6.0",
-    "rich>=13.0",
+    "cryptography>=42.0.0",
 ]
 
 [project.optional-dependencies]
+# `tempus guard request` talks to a local gate through the core library.
+gate = ["tempus-ddb>=0.6,<0.8"]
 dev = [
-    "build>=1.2.0",
-    "pytest>=7.0.0",
-    "pytest-cov>=4.1.0",
-    "twine>=5.0.0",
-    "ruff",
-    "mypy"
+    "build>=1.2",
+    "pytest>=8.0.0",
+    "ruff>=0.4.0",
+    "twine>=5.0",
 ]
-explain = []
+
+[project.urls]
+Homepage = "https://github.com/Julio-Patron/Universal-Kernel-Ciel"
+Protocol = "https://github.com/Julio-Patron/tempus-ddb"
+Verifier = "https://julio-patron.github.io/tempus-ddb/verify.html"
 
 [project.scripts]
-ciel-gate = "ciel_gate.cli:app"
+tempus-guard = "tempus_guard.cli:entrypoint"
+tempus-guard-cli = "tempus_guard.cli:entrypoint"
 
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["ciel_gate*"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/tempus_guard"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/tempus_guard", "tests", "README.md", "CHANGELOG.md", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 110
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]
