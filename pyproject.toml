@@ -39,7 +39,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/tempus-protocol/Universal-Kernel-Ciel"
+Homepage = "https://github.com/tempus-protocol/tempus-guard-cli"
 Protocol = "https://github.com/tempus-protocol/tempus-ddb"
 Verifier = "https://tempus-protocol.github.io/tempus-ddb/verify.html"
 

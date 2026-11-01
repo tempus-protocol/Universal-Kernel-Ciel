@@ -6,7 +6,9 @@ All notable changes to this project will be documented here.
 
 The Tempus Guard CLI (formerly Ciel) becomes the local client of Tempus Guard for GitHub. One protocol (the
 `tempus.action-intent.v1` contract of tempus-ddb), one policy evaluator (the gate's), one
-ledger (the gate's), one brand. The repository lives in the `tempus-protocol` GitHub organization.
+ledger (the gate's), one brand. The repository lives in the `tempus-protocol` GitHub organization
+and was renamed from `Universal-Kernel-Ciel` to `tempus-guard-cli` on 2026-11-01; GitHub redirects
+the old URL.
 
 ### Added
 
