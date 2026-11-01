@@ -39,9 +39,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Julio-Patron/Universal-Kernel-Ciel"
-Protocol = "https://github.com/Julio-Patron/tempus-ddb"
-Verifier = "https://julio-patron.github.io/tempus-ddb/verify.html"
+Homepage = "https://github.com/tempus-protocol/Universal-Kernel-Ciel"
+Protocol = "https://github.com/tempus-protocol/tempus-ddb"
+Verifier = "https://tempus-protocol.github.io/tempus-ddb/verify.html"
 
 [project.scripts]
 tempus-guard = "tempus_guard.cli:entrypoint"

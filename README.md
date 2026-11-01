@@ -1,6 +1,6 @@
 # Tempus Guard CLI
 
-**The local client of [Tempus Guard for GitHub](https://github.com/Julio-Patron/tempus-ddb).**
+**The local client of [Tempus Guard for GitHub](https://github.com/tempus-protocol/tempus-ddb).**
 
 Coding agents commit locally and never hold a GitHub credential. The Tempus Guard CLI runs where the agent
 runs and does one thing: it turns the commits on a branch into a signed
@@ -87,7 +87,7 @@ command. The hook never replaces a hook it did not write unless `--force` is giv
 * It does not push. The executor does, once, with a short-lived installation token, after
   re-deriving every field above from the bundle.
 * It does not keep a ledger. The gate's ledger and the exported evidence bundle do; verify
-  them at <https://julio-patron.github.io/tempus-ddb/verify.html> with the gate's public key.
+  them at <https://tempus-protocol.github.io/tempus-ddb/verify.html> with the gate's public key.
 
 ## Development
 
