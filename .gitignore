@@ -79,3 +79,14 @@ yarn-error.log
 *.swo
 *~
 .DS_Store
+
+# Keys, databases and environments never enter the repository
+*.pem
+*.keys.json
+*_keys.json
+keys.json
+*.db
+*.db-*
+.env
+.env.*
+!.env.example
